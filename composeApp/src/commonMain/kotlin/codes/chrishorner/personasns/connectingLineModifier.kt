@@ -9,8 +9,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.unit.dp
-import org.jetbrains.skia.FilterBlurMode
-import org.jetbrains.skia.MaskFilter
+import codes.chrishorner.personasns.interop.setBlurMask
 
 /**
  * Draws a black line from `entry` to `entry2` (if it exists).
@@ -31,11 +30,7 @@ fun Modifier.drawConnectingLine(entry1: Entry, entry2: Entry?): Modifier {
         val shadowPaint = Paint().apply {
             color = Color.Black
             alpha = 0.5f
-            // Skia / Skiko-based blur implementation interprets radius differently than Android's BlurMaskFilter.
-            // Therefore, radius is adjusted with the difference (2r v r in final interpretation).
-            // Originally used 4dp as 2r on BlurMaskFilter. Therefore r = 2dp
-            asFrameworkPaint().maskFilter =
-                MaskFilter.makeBlur(FilterBlurMode.NORMAL, (4 / 2).dp.toPx())
+            setBlurMask(4.dp.toPx())
         }
 
         onDrawBehind {
