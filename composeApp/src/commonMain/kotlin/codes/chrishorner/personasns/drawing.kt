@@ -13,31 +13,33 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.takeOrElse
 
 fun DrawScope.Outline(shape: Shape): Outline {
-  return shape.createOutline(size, layoutDirection, this)
+    return shape.createOutline(size, layoutDirection, this)
 }
 
 fun CacheDrawScope.Outline(shape: Shape): Outline {
-  return shape.createOutline(size, layoutDirection, this)
+    return shape.createOutline(size, layoutDirection, this)
 }
 
 /**
  * Takes an SVG string and returns a [Path]. If [width] and [height] are not provided, then it's
  * assumed that the intrinsic width and height of the path's bounds are in [Dp].
  */
-context(Density)
-fun String.asPath(
-  width: Dp = Dp.Unspecified,
-  height: Dp = Dp.Unspecified,
+//context(Density)
+//fun String.asPath(
+fun Density.pathFrom(
+    svgString: String,
+    width: Dp = Dp.Unspecified,
+    height: Dp = Dp.Unspecified,
 ): Path {
-  val path = PathParser().parsePathString(this).toPath()
-  val bounds = path.getBounds()
-  val widthPx = width.takeOrElse { bounds.width.dp }.toPx()
-  val heightPx = height.takeOrElse { bounds.height.dp }.toPx()
-  val matrix = Matrix().apply {
-    translate(x = bounds.center.x, y = bounds.center.y)
-    scale(x = widthPx / bounds.width, y = heightPx / bounds.height)
-  }
+    val path = PathParser().parsePathString(svgString).toPath()
+    val bounds = path.getBounds()
+    val widthPx = width.takeOrElse { bounds.width.dp }.toPx()
+    val heightPx = height.takeOrElse { bounds.height.dp }.toPx()
+    val matrix = Matrix().apply {
+        translate(x = bounds.center.x, y = bounds.center.y)
+        scale(x = widthPx / bounds.width, y = heightPx / bounds.height)
+    }
 
-  path.transform(matrix)
-  return path
+    path.transform(matrix)
+    return path
 }
