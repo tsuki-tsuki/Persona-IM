@@ -2,7 +2,10 @@
 
 <img width="30%" src="https://github.com/user-attachments/assets/297cb21b-415f-4c9b-a258-1181c63c1b95" align="right">
 
-A reimplementation of the instant messaging app seen in Persona 5 for Android using Compose UI.
+A reimplementation of the instant messaging app seen in Persona 5 for Kotlin Multiplatform using Compose Multiplatform.
+
+This take inspiration from the main project this is forked from.
+The main intention of this fork is to try to port the original code from Android only to Kotlin Multiplatform using Compose Multiplatform.
 
 > [!NOTE]  
 > This is _not_ a functioning messaging app. It simulates a single conversation to demonstrate how such an app would be implemented in Compose UI.
