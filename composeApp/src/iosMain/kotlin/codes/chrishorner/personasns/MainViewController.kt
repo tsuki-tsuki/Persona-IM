@@ -1,4 +1,4 @@
-package stream.swiftmoon.personasns
+package codes.chrishorner.personasns
 
 import androidx.compose.ui.window.ComposeUIViewController
 
