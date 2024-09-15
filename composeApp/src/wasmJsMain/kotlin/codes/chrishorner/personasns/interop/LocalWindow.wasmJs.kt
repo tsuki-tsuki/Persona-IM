@@ -1,4 +1,4 @@
-package stream.swiftmoon.personasns.interop
+package codes.chrishorner.personasns.interop
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
