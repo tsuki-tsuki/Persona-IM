@@ -5,8 +5,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import org.jetbrains.compose.resources.Font
-import personaim.composeapp.generated.resources.Res
-import personaim.composeapp.generated.resources.optima_nova_black
+import personasns.composeapp.generated.resources.Res
+import personasns.composeapp.generated.resources.optima_nova_black
 
 val OptimaNova
     @Composable get() = FontFamily(

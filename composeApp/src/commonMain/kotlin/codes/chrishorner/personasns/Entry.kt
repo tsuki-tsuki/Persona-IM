@@ -22,8 +22,8 @@ import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.painterResource
-import personaim.composeapp.generated.resources.Res
-import personaim.composeapp.generated.resources.question_mark
+import personasns.composeapp.generated.resources.Res
+import personasns.composeapp.generated.resources.question_mark
 
 /**
  * A message received in chat - one not sent by the player.

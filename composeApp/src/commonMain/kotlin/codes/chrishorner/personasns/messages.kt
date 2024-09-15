@@ -5,10 +5,10 @@ import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.persistentListOf
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.DrawableResource
-import personaim.composeapp.generated.resources.Res
-import personaim.composeapp.generated.resources.ann
-import personaim.composeapp.generated.resources.ryuji
-import personaim.composeapp.generated.resources.yusuke
+import personasns.composeapp.generated.resources.Res
+import personasns.composeapp.generated.resources.ann
+import personasns.composeapp.generated.resources.ryuji
+import personasns.composeapp.generated.resources.yusuke
 
 data class Message(
     val sender: Sender,

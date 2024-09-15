@@ -28,8 +28,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
-import personaim.composeapp.generated.resources.Res
-import personaim.composeapp.generated.resources.typing_bubble
+import personasns.composeapp.generated.resources.Res
+import personasns.composeapp.generated.resources.typing_bubble
 
 /**
  * Animated dots inside of a speech bubble to indicate that someone is "typing".
