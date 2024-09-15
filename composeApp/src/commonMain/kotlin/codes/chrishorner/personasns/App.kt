@@ -30,10 +30,10 @@ import androidx.compose.ui.unit.dp
 import codes.chrishorner.personasns.interop.LocalWindow
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.painterResource
-import personaim.composeapp.generated.resources.Res
-import personaim.composeapp.generated.resources.bg_splatter_background
-import personaim.composeapp.generated.resources.logo_im
-import personaim.composeapp.generated.resources.next
+import personasns.composeapp.generated.resources.Res
+import personasns.composeapp.generated.resources.bg_splatter_background
+import personasns.composeapp.generated.resources.logo_im
+import personasns.composeapp.generated.resources.next
 
 @Composable
 fun App() {
