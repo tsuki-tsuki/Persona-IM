@@ -133,8 +133,18 @@ compose.desktop {
 
         nativeDistributions {
             targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "codes.chrishorner.personasns"
-            packageVersion = "2.0.0"
+            packageName = "Persona IM"
+            packageVersion = "1.0.0"
+            macOS {
+                bundleID = "codes.chrishorner.personasns"
+                iconFile.set(project.file("src/desktopMain/resources/app-icon.icns"))
+            }
+            linux {
+                iconFile.set(project.file("src/desktopMain/resources/app-icon.png"))
+            }
+            windows {
+                iconFile.set(project.file("src/desktopMain/resources/app-icon.ico"))
+            }
         }
     }
 }
