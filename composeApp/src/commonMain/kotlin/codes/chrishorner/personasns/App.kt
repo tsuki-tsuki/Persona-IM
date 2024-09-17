@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,10 +23,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import codes.chrishorner.personasns.interop.LocalWindow
+import codes.chrishorner.personasns.interop.RootContainer
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.painterResource
 import personasns.composeapp.generated.resources.Res
@@ -40,7 +38,10 @@ fun App() {
     val transcriptState = rememberTranscriptState()
     var season by remember { mutableStateOf(Season.NONE) }
 
-    RootContainer {
+    RootContainer(
+        statusBarColor = Color.Black.copy(alpha = 0.3f),
+        navigationBarColor = Color.Transparent,
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -112,14 +113,4 @@ private fun NextButton(onClick: () -> Unit, modifier: Modifier = Modifier) {
             contentDescription = "Next button",
         )
     }
-}
-
-@Composable
-private fun RootContainer(content: @Composable () -> Unit) {
-    val window = LocalWindow.current
-    SideEffect {
-        window.statusBarColor = Color.Black.copy(alpha = 0.3f).toArgb()
-        window.navigationBarColor = Color.Transparent.toArgb()
-    }
-    content()
 }
