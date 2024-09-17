@@ -1,3 +1,4 @@
+import co.touchlab.skie.configuration.annotations.FlowInterop
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -151,4 +152,9 @@ compose.desktop {
 
 composeCompiler {
     enableStrongSkippingMode = true
+}
+
+skie.features {
+    FlowInterop.Enabled()
+    enableSwiftUIObservingPreview = true
 }
