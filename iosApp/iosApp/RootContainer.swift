@@ -15,6 +15,7 @@ struct RootContainer<Content: View>: View {
     // These 2 states will sync from Compose world via Flow async.
     @State private var statusBarColor = Color.clear
     @State private var navigationBarColor = Color.clear
+    @State private var backgroundColor = Color.black
 
     public init(@ViewBuilder content: @escaping () -> Content) {
         self.content = content
@@ -47,7 +48,11 @@ struct RootContainer<Content: View>: View {
                         .opacity(0.5)
                     }
                 }
-                .background(Color.black)
+                .background(backgroundColor)
+                .collect(flow: WindowColorState.shared.backgroundColor) {
+                    color in
+                    backgroundColor = Color(color)
+                }
                 .ignoresSafeArea(.container, edges: [.top, .bottom])
         }
     }
