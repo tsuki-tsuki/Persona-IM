@@ -1,15 +1,23 @@
 package codes.chrishorner.personasns.interop
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
+import codes.chrishorner.personasns.updateThemeColor
 
+@OptIn(ExperimentalStdlibApi::class)
 @Composable
 actual fun RootContainer(
-    statusBarColor: Color,
-    navigationBarColor: Color,
-    content: @Composable () -> Unit
+    colors: RootContainerColor,
+    content: @Composable (BoxScope.() -> Unit)
 ) {
-    // TODO set browser top bar color?
-    // systemBarColor is not used
-    content()
+    val argbString = colors.statusBarColor.toArgb().toHexString()
+    val rgbaString = argbString.substring(2) + argbString.substring(0, 2)
+    updateThemeColor("#$rgbaString")
+
+    Box(modifier = Modifier.fillMaxSize().background(colors.backgroundColor), content = content)
 }
