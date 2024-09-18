@@ -2,13 +2,11 @@ package codes.chrishorner.personasns
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
@@ -26,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import codes.chrishorner.personasns.interop.RootContainer
+import codes.chrishorner.personasns.interop.RootContainerColor
 import kotlinx.collections.immutable.toImmutableList
 import org.jetbrains.compose.resources.painterResource
 import personasns.composeapp.generated.resources.Res
@@ -39,57 +38,54 @@ fun App() {
     var season by remember { mutableStateOf(Season.NONE) }
 
     RootContainer(
-        statusBarColor = Color.Black.copy(alpha = 0.3f),
-        navigationBarColor = Color.Transparent,
+        colors = RootContainerColor(
+            statusBarColor = Color.Black.copy(alpha = 0.3f),
+            navigationBarColor = Color.Transparent,
+            backgroundColor = PersonaRed,
+        )
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = PersonaRed)
-        ) {
-            BackgroundParticles(season)
+        BackgroundParticles(season)
 
-            Image(
-                painter = painterResource(Res.drawable.bg_splatter_background),
-                contentDescription = null,
-                contentScale = ContentScale.FillWidth,
-                modifier = Modifier
-                    .statusBarsPadding()
-                    .offset(y = (-16).dp)
+        Image(
+            painter = painterResource(Res.drawable.bg_splatter_background),
+            contentDescription = null,
+            contentScale = ContentScale.FillWidth,
+            modifier = Modifier
+                .statusBarsPadding()
+                .offset(y = (-16).dp)
+        )
+
+        val entries = transcriptState.entries
+        Transcript(entries)
+
+        Row(
+            modifier = Modifier.statusBarsPadding()
+        ) {
+            SeasonMenu(
+                hostElement = {
+                    Image(
+                        painter = painterResource(Res.drawable.logo_im),
+                        contentDescription = null,
+                        modifier = Modifier.height(100.dp)
+                    )
+                },
+                onSeasonChange = { season = it },
+                modifier = Modifier.offset(x = 8.dp, y = (-4).dp),
             )
 
-            val entries = transcriptState.entries
-            Transcript(entries)
-
-            Row(
-                modifier = Modifier.statusBarsPadding()
-            ) {
-                SeasonMenu(
-                    hostElement = {
-                        Image(
-                            painter = painterResource(Res.drawable.logo_im),
-                            contentDescription = null,
-                            modifier = Modifier.height(100.dp)
-                        )
-                    },
-                    onSeasonChange = { season = it },
-                    modifier = Modifier.offset(x = 8.dp, y = (-4).dp),
-                )
-
-                Portraits(
-                    senders = Sender.entries.minus(Sender.Ren).toImmutableList(),
-                    modifier = Modifier.weight(1f),
-                )
-            }
-
-            NextButton(
-                onClick = { transcriptState.advance() },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .systemBarsPadding()
-                    .padding(16.dp)
+            Portraits(
+                senders = Sender.entries.minus(Sender.Ren).toImmutableList(),
+                modifier = Modifier.weight(1f),
             )
         }
+
+        NextButton(
+            onClick = { transcriptState.advance() },
+            modifier = Modifier
+                .align(Alignment.BottomEnd)
+                .systemBarsPadding()
+                .padding(16.dp)
+        )
     }
 }
 
