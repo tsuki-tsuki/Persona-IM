@@ -7,7 +7,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.graphics.drawscope.withTransform
@@ -25,7 +24,7 @@ import kotlin.random.Random
 @Composable
 fun Portraits(senders: ImmutableList<Sender>, modifier: Modifier = Modifier) {
     val density = LocalDensity.current
-    val resolvedSenders = senders.resolveDrawableToImageBitmapByMap()
+    val senderImages = senders.resolveDrawableToImageBitmapByMap()
 
     val portraitDisplayModels = remember(senders, density) {
         with(density) {
@@ -37,7 +36,6 @@ fun Portraits(senders: ImmutableList<Sender>, modifier: Modifier = Modifier) {
                     sender,
                     allowHorizontalOffset = index > 0,
                     darkAvatar = darkAvatarIndex == index,
-                    resolvedSenders,
                 )
             }
         }
@@ -94,7 +92,7 @@ fun Portraits(senders: ImmutableList<Sender>, modifier: Modifier = Modifier) {
                         drawRect(Color.Black)
                     }
 
-                    model.image?.let {
+                    senderImages[model.sender]?.let {
                         translate(left = model.imageOffset.x, top = model.imageOffset.y) {
                             drawImage(it)
                         }
@@ -113,7 +111,6 @@ private fun Density.getDisplayModelFor(
     sender: Sender,
     allowHorizontalOffset: Boolean,
     darkAvatar: Boolean,
-    imageMap: Map<Sender, ImageBitmap?>,
 ): PortraitDisplayModel {
 
     fun middleOffset(): Float {
@@ -147,7 +144,7 @@ private fun Density.getDisplayModelFor(
     val innerRotation = randomBetween(-2f, 0f)
 
     return PortraitDisplayModel(
-        image = imageMap[sender],
+        sender = sender,
         imageOffset = Offset(
             // Ann's portrait is kind of annoying and looks a bit better when offset to the right.
             x = if (sender == Sender.Ann) 8.dp.toPx() else 0f,
@@ -171,7 +168,7 @@ private fun Density.getDisplayModelFor(
 private val PortraitSize = DpSize(width = 70.dp, height = 80.dp)
 
 private data class PortraitDisplayModel(
-    val image: ImageBitmap?,
+    val sender: Sender,
     val imageOffset: Offset,
     val outerRotation: Float,
     val middleRotation: Float,
